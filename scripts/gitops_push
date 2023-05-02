@@ -1,0 +1,28 @@
+#! /bin/bash
+
+# Set param branch or main
+TARGET_BRANCH=${BRANCH_NAME:-"main"}
+TARGET_ID=${PUSH_ID:-"gitops"}
+
+echo "Set target branch as $TARGET_BRANCH and target id as $TARGET_ID"
+
+# Clone repository
+git clone -b $TARGET_BRANCH "$K8S_GITOPS_REPO" $TARGET_ID && cd $TARGET_ID 
+echo "Upgrading $DEPLOY_PATH to $IMAGE_TAG on branch $TARGET_BRANCH"
+ls
+# Set git config
+git config --local user.email "$(git log -n 1 --pretty=format:%ae)"
+git config --local user.name "$(git log -n 1 --pretty=format:%an)"
+
+# Upgrade repository with newer image
+yq write -i \
+  "$DEPLOY_PATH/deployment.yaml" \
+  spec.template.spec.containers.0.image \
+  "$IMAGE_TAG" || exit 1
+
+#Commit and push newer version
+git commit -am "chore($DEPLOY_PATH): update deployment image"
+git push origin $TARGET_BRANCH
+
+#remove 
+cd .. && rm -rf $TARGET_ID
