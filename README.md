@@ -1,6 +1,6 @@
 # GitOps Deployment Upgrader
 
-This script automates the process of upgrading a Kubernetes deployment with a newer Docker image, using GitOps practices. It clones a Git repository, updates a **deployment.yaml** file with the specified image tag, commits and pushes the changes to the repository, and removes the cloned directory.
+This script automates the process of upgrading a Kubernetes deployment with a newer Docker image, using GitOps practices. It clones a Git repository, updates a **deployment.yaml**(or `TARGET_FILE`) file with the specified image tag, commits and pushes the changes to the repository, and removes the cloned directory.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ This script automates the process of upgrading a Kubernetes deployment with a ne
 - `TARGET_FILE` (optional): The file to be edited, which must exist within the path specified in DEPLOY_PATH. Defaults to "deployment.yaml" if not provided.
 - `YAML_PATH` (optional): The image path within the $TARGET_FILE to be edited. Defaults to "spec.template.spec.containers.0.image" if not provided.
 - `K8S_GITOPS_REPO` (required): The URL of the GitOps repository to clone.
-- `DEPLOY_PATH` (required): The path to the **deployment.yaml** file to update, relative to the root of the cloned repository.
+- `DEPLOY_PATH` (required): The path to the **deployment.yaml**( or `TARGET_FILE`) file to update, relative to the root of the cloned repository.
 - `IMAGE_TAG` (required): The Docker image tag to use for the upgrade.
 
 ### Example
