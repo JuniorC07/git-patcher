@@ -44,6 +44,3 @@ The script will perform the following steps:
 ## License
 
 This script is licensed under the MIT License. See the LICENSE file for details.
-# git-patcher
-# git-patcher
-# git-patcher
