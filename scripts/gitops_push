@@ -9,7 +9,7 @@ echo "Set target branch as $TARGET_BRANCH and target id as $TARGET_ID"
 # Clone repository
 git clone -b $TARGET_BRANCH "$K8S_GITOPS_REPO" $TARGET_ID && cd $TARGET_ID 
 echo "Upgrading $DEPLOY_PATH to $IMAGE_TAG on branch $TARGET_BRANCH"
-ls
+
 # Set git config
 git config --local user.email "$(git log -n 1 --pretty=format:%ae)"
 git config --local user.name "$(git log -n 1 --pretty=format:%an)"
@@ -26,3 +26,5 @@ git push origin $TARGET_BRANCH
 
 #remove 
 cd .. && rm -rf $TARGET_ID
+echo "Removed $TARGET_ID from runner"
+
