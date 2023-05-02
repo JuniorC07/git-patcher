@@ -24,9 +24,11 @@ This script automates the process of upgrading a Kubernetes deployment with a ne
 ### Example
 
 - BRANCH_NAME=dev 
-- PUSH_ID=f0fac537 preferably a unique id for each run
+- PUSH_ID=f0fac537 (preferably a unique id for each run)
+- TARGET_FILE=deploy.yml
+- YAML_PATH=spec.template.spec.containers.1.image
 - K8S_GITOPS_REPO=https://<token>@github.com/myorg/my-k8s-repo.git
-- DEPLOY_PATH=myapp/deployment.yaml 
+- DEPLOY_PATH=group/app
 - IMAGE_TAG=v1.2.3
 
 
@@ -38,7 +40,7 @@ The script will perform the following steps:
 2. Set the target branch to either the provided `BRANCH_NAME` or "main".
 3. Set the target ID to either the provided `PUSH_ID` or "gitops".
 4. Clone the target repository and checkout the target branch.
-5. Navigate to the cloned directory and update the deployment.yaml file with the provided `IMAGE_TAG`.
+5. Navigate to the cloned directory and update the `TARGET_FILE` file with the provided `IMAGE_TAG`.
 6. Commit the changes with a message that includes the `DEPLOY_PATH` and `PUSH_ID`.
 7. Push the changes to the target branch in the remote repository.
 8. Remove the cloned directory.
