@@ -3,6 +3,8 @@
 # Set param branch or main
 TARGET_BRANCH=${BRANCH_NAME:-"main"}
 TARGET_ID=${PUSH_ID:-"gitops"}
+TARGET_FILE=${TARGET_FILE:-"deployment.yaml"}
+YAML_PATH=${YAML_PATH:-"spec.template.spec.containers.0.image"}
 
 echo "Set target branch as $TARGET_BRANCH and target id as $TARGET_ID"
 
@@ -16,8 +18,8 @@ git config --local user.name "$(git log -n 1 --pretty=format:%an)"
 
 # Upgrade repository with newer image
 yq write -i \
-  "$DEPLOY_PATH/deployment.yaml" \
-  spec.template.spec.containers.0.image \
+  "$DEPLOY_PATH/$TARGET_FILE" \
+  $YAML_PATH \
   "$IMAGE_TAG" || exit 1
 
 #Commit and push newer version

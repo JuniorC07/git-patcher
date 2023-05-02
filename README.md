@@ -15,6 +15,8 @@ This script automates the process of upgrading a Kubernetes deployment with a ne
 
 - `BRANCH_NAME` (optional): The name of the branch to target. Defaults to "main" if not provided.
 - `PUSH_ID` (optional): The name to use for the cloned directory and the commit message. Defaults to "gitops" if not provided.
+- `TARGET_FILE` (optional): The file to be edited, which must exist within the path specified in DEPLOY_PATH. Defaults to "deployment.yaml" if not provided.
+- `YAML_PATH` (optional): The image path within the $TARGET_FILE to be edited. Defaults to "spec.template.spec.containers.0.image" if not provided.
 - `K8S_GITOPS_REPO` (required): The URL of the GitOps repository to clone.
 - `DEPLOY_PATH` (required): The DEPLOY_PATH to the **deployment.yaml** file to update, relative to the root of the cloned repository.
 - `IMAGE_TAG` (required): The Docker image tag to use for the upgrade.
