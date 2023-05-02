@@ -9,6 +9,8 @@ This script automates the process of upgrading a Kubernetes deployment with a ne
 - The target Kubernetes GitOps repository must exist and be accessible.
 - The deployment.yaml file in the target repository must follow the Kubernetes API specification and include a container image field to be updated.
 
+ ### OR use [Docker](https://hub.docker.com/r/juniorc07/git-patcher/tags)
+
 ## Usage
 
 ### Parameters
